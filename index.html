@@ -257,8 +257,7 @@
             </div>
 
             <div class="success-message" id="successMessage">
-                출석부가 성공적으로 제출되었습니다! 수고하셨습니다. 🙏
-            </div>
+                </div>
 
             <form id="attendanceForm">
                 <div class="form-group">
@@ -378,58 +377,86 @@
             });
         }
 
-        // 폼 제출 처리
+        // 폼 제출 처리 (개선된 버전)
         function handleFormSubmit() {
             const form = document.getElementById('attendanceForm');
             const successMessage = document.getElementById('successMessage');
-            
+            const submitButton = form.querySelector('.submit-btn'); // 버튼을 가져옴
+
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
+                // 버튼 비활성화 (중복 제출 방지)
+                submitButton.disabled = true;
+                submitButton.textContent = '제출 중...';
+
                 // 폼 데이터 수집
                 const formData = new FormData(form);
                 const data = {};
-                
+
                 for (let [key, value] of formData.entries()) {
                     data[key] = value;
                 }
-                
-                // 현재 날짜 추가
-                data.date = new Date().toISOString().split('T')[0];
-                
-                // 성공 메시지 표시
-                successMessage.style.display = 'block';
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // 폼 초기화
-                form.reset();
-                
-                // Google Apps Script로 데이터 전송
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8cAvvlZS0Dqx8ocSzkwN-m0EfJ7DfXuw3Gj2Wz214NOe1c8JJt7l6qpb0vb_3y61N/exec'; // 실제 URL로 교체
 
-fetch(SCRIPT_URL, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-})
-.then(response => response.json())
-.then(result => {
-    if (result.success) {
-        console.log('데이터 전송 성공:', result);
-    } else {
-        console.error('데이터 전송 실패:', result.error);
-    }
-})
-.catch(error => {
-    console.error('오류:', error);
-});
-                
-                // 3초 후 성공 메시지 숨김
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000);
+                // 현재 날짜 추가
+                // (Apps Script에서 사용하지 않으므로, Apps Script에서 날짜를 생성하도록 유지하는 것이 좋습니다.
+                // 또는 Apps Script에서 `data.date`를 사용하여 기록하도록 수정해야 합니다. 여기서는 그대로 둡니다.)
+                data.date = new Date().toISOString().split('T')[0];
+
+                // Google Apps Script로 데이터 전송
+                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbzSlcSTFly5ZopiK9z37uSNaAVgy_-aZoZ6XTPOM7yTTMojQcD0bG4Bj9OU0aQ6g208/exec'
+                // 이 URL을 실제 배포된 Google Apps Script 웹 앱의 URL로 반드시 교체해야 합니다!
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSlcSTFly5ZopiK9z37uSNaAVgy_-aZoZ6XTPOM7yTTMojQcD0bG4Bj9OU0aQ6g208/exec'; 
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        console.log('데이터 전송 성공:', result);
+                        successMessage.textContent = '출석부가 성공적으로 제출되었습니다! 수고하셨습니다. 🙏';
+                        successMessage.style.backgroundColor = '#d4edda'; // 성공 색상
+                        successMessage.style.color = '#155724'; // 성공 텍스트 색상
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                        // 폼 초기화
+                        form.reset();
+                        // 미출석 사유 필드 숨김 상태로 되돌리기 (필요하다면)
+                        document.querySelector('label[for="absenceReason"]').parentElement.style.display = 'none';
+
+                    } else {
+                        console.error('데이터 전송 실패:', result.error);
+                        successMessage.textContent = '제출 실패: ' + result.error + ' 😢 다시 시도해주세요.';
+                        successMessage.style.backgroundColor = '#f8d7da'; // 오류 색상
+                        successMessage.style.color = '#721c24'; // 오류 텍스트 색상
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch 오류:', error);
+                    successMessage.textContent = '데이터 전송 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요. 😭';
+                    successMessage.style.backgroundColor = '#f8d7da';
+                    successMessage.style.color = '#721c24';
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                })
+                .finally(() => {
+                    // 버튼 다시 활성화
+                    submitButton.disabled = false;
+                    submitButton.textContent = '출석부 제출하기';
+
+                    // 3초 후 메시지 숨김
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000); // 오류 메시지는 좀 더 길게 표시할 수도 있습니다.
+                });
             });
         }
 
@@ -437,24 +464,8 @@ fetch(SCRIPT_URL, {
         document.addEventListener('DOMContentLoaded', function() {
             displayCurrentDate();
             toggleAbsenceReason();
-            handleFormSubmit();
+            handleFormSubmit(); // 이 함수가 호출되어 폼 제출 이벤트를 처리합니다.
         });
     </script>
 </body>
 </html>
-Commit new file
-
-Commit message
-[Create index.html                    ] ← 이 부분을 지우고
-
-↓ 아래처럼 새로 입력
-
-[인천성산교회 교사 출석부 시스템 추가    ]
-
-Extended description
-[                                    ] ← 여기는 비워두세요
-
-○ Commit directly to the main branch     ← 이미 선택됨
-○ Create a new branch for this commit and start a pull request
-
-[Commit new file] ← 이 버튼 클릭
