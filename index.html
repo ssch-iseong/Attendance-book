@@ -404,8 +404,27 @@
                 // 폼 초기화
                 form.reset();
                 
-                // 실제 구현에서는 여기서 서버로 데이터 전송
-                console.log('출석부 데이터:', data);
+                // Google Apps Script로 데이터 전송
+const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // 실제 URL로 교체
+
+fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(result => {
+    if (result.success) {
+        console.log('데이터 전송 성공:', result);
+    } else {
+        console.error('데이터 전송 실패:', result.error);
+    }
+})
+.catch(error => {
+    console.error('오류:', error);
+});
                 
                 // 3초 후 성공 메시지 숨김
                 setTimeout(() => {
