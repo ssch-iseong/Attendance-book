@@ -248,7 +248,7 @@
     <div class="container">
         <div class="header">
             <h1>✝️ 인천성산교회 중고등부 교사 출석부</h1>
-            <p>하나님의 사랑으로 섬기는 쌤들을 위한 출석 관리 시스템</p>
+            <p>하나님의 사랑으로 섬기는 교사님들을 위한 출석 관리 시스템</p>
         </div>
 
         <div class="form-container">
@@ -404,9 +404,9 @@
                 data.date = new Date().toISOString().split('T')[0];
 
                 // Google Apps Script로 데이터 전송
-                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbzk_mFRGhf2YxQUviMsLI44E9VJEtVWMdgIetgu5A-D-tHAl8qT6YU0qchSyo3a3n0T/exec'
+                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbx3k6cjZO7yhwvRNzfNM7i-2J-Otxnf7r5YEmU0NJKs64DBdDQPN3pB1ODDrWM2zyUA/exec'
                 // 이 URL을 실제 배포된 Google Apps Script 웹 앱의 URL로 반드시 교체해야 합니다!
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzk_mFRGhf2YxQUviMsLI44E9VJEtVWMdgIetgu5A-D-tHAl8qT6YU0qchSyo3a3n0T/exec'; 
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3k6cjZO7yhwvRNzfNM7i-2J-Otxnf7r5YEmU0NJKs64DBdDQPN3pB1ODDrWM2zyUA/exec'; 
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
