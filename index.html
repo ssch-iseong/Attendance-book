@@ -404,9 +404,9 @@
                 data.date = new Date().toISOString().split('T')[0];
 
                 // Google Apps Script로 데이터 전송
-                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbx3k6cjZO7yhwvRNzfNM7i-2J-Otxnf7r5YEmU0NJKs64DBdDQPN3pB1ODDrWM2zyUA/exec'
+                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec'
                 // 이 URL을 실제 배포된 Google Apps Script 웹 앱의 URL로 반드시 교체해야 합니다!
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3k6cjZO7yhwvRNzfNM7i-2J-Otxnf7r5YEmU0NJKs64DBdDQPN3pB1ODDrWM2zyUA/exec'; 
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec'; 
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
