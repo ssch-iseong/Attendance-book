@@ -5,88 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 청소년부 교사 출석부</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; }
+        * { font-family: 'Noto Sans KR', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        
+        .form-card { 
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.15);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+        }
+
+        .attendance-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 2px solid #e5e7eb;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            color: #6b7280;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .icon-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .label-text {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        select, input, textarea {
+            font-size: 1rem;
+        }
     </style>
 </head>
-<body class="bg-slate-100 py-8 px-4">
-    <div class="max-w-md mx-auto bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
-        <div class="bg-indigo-700 p-8 text-white text-center">
-            <h1 class="text-2xl font-bold tracking-tight">청소년부 교사 출석부</h1>
-            <p class="text-indigo-100 text-sm mt-2 opacity-90">선생님, 오늘 사역 수고 많으셨습니다!</p>
+<body class="py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center text-white mb-8">
+            <h1 class="text-4xl font-bold mb-2">청소년부 출석부</h1>
+            <p class="text-indigo-100 text-lg">선생님의 사역을 응원합니다 🙏</p>
         </div>
-        
-        <form id="attendanceForm" class="p-8 space-y-6">
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">교사 성함</label>
-                <select name="teacherName" required class="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50">
-                    <option value="">이름을 선택해 주세요</option>
-                    <option value="도민수쌤(부장)">도민수쌤(부장)</option>
-                    <option value="김영광쌤(총무)">김영광쌤(총무)</option>
-                    <option value="허현범쌤(회계)">허현범쌤(회계)</option>
-                    <option value="최은혜쌤(서기/중1 담임)">최은혜쌤(서기/중1 담임)</option>
-                    <option value="박기태쌤(교육부장/보조교사)">박기태쌤(교육부장/보조교사)</option>
-                    <option value="권오경쌤(고3-1 담임)">권오경쌤(고3-1 담임)</option>
-                    <option value="윤동길쌤(고3-2 담임)">윤동길쌤(고3-2 담임)</option>
-                    <option value="김혁배쌤(고2 담임)">김혁배쌤(고2 담임)</option>
-                    <option value="백경호쌤(고1-1 담임)">백경호쌤(고1-1 담임)</option>
-                    <option value="박대경쌤(고1-2 담임)">박대경쌤(고1-2 담임)</option>
-                    <option value="김수연쌤(중3-1 담임)">김수연쌤(중3-1 담임)</option>
-                    <option value="봉진영쌤(중3-2 담임)">봉진영쌤(중3-2 담임)</option>
-                    <option value="유기주쌤(중2-1 담임)">유기주쌤(중2-1 담임)</option>
-                    <option value="장근태쌤(중2-2 담임)">장근태쌤(중2-2 담임)</option>
-                    <option value="정민지쌤(중1 부담임)">정민지쌤(중1 부담임)</option>
-                    <option value="허예성쌤(중3-1 부담임)">허예성쌤(중3-1 부담임)</option>
-                    <option value="박경민쌤(할룸/보조교사)">박경민쌤(할룸/보조교사)</option>
-                </select>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4">
+        <!-- Main Form Card -->
+        <div class="form-card bg-white rounded-2xl overflow-hidden">
+            <form id="attendanceForm" class="p-8 space-y-8">
+                <!-- 교사 정보 섹션 -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">부서예배</label>
-                    <select name="deptWorship" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
-                        <option value="참석">참석</option>
-                        <option value="미참석">미참석</option>
+                    <label class="label-text">👨‍🏫 교사 성함</label>
+                    <select name="teacherName" required class="w-full border-2 border-gray-200 rounded-xl p-3.5 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-gray-50 hover:bg-white">
+                        <option value="">이름을 선택해 주세요</option>
+                        <option value="도민수쌤(부장)">도민수쌤(부장)</option>
+                        <option value="김영광쌤(총무)">김영광쌤(총무)</option>
+                        <option value="허현범쌤(회계)">허현범쌤(회계)</option>
+                        <option value="최은혜쌤(서기/중1 담임)">최은혜쌤(서기/중1 담임)</option>
+                        <option value="박기태쌤(교육부장/보조교사)">박기태쌤(교육부장/보조교사)</option>
+                        <option value="권오경쌤(고3-1 담임)">권오경쌤(고3-1 담임)</option>
+                        <option value="윤동길쌤(고3-2 담임)">윤동길쌤(고3-2 담임)</option>
+                        <option value="김혁배쌤(고2 담임)">김혁배쌤(고2 담임)</option>
+                        <option value="백경호쌤(고1-1 담임)">백경호쌤(고1-1 담임)</option>
+                        <option value="박대경쌤(고1-2 담임)">박대경쌤(고1-2 담임)</option>
+                        <option value="김수연쌤(중3-1 담임)">김수연쌤(중3-1 담임)</option>
+                        <option value="봉진영쌤(중3-2 담임)">봉진영쌤(중3-2 담임)</option>
+                        <option value="유기주쌤(중2-1 담임)">유기주쌤(중2-1 담임)</option>
+                        <option value="장근태쌤(중2-2 담임)">장근태쌤(중2-2 담임)</option>
+                        <option value="정민지쌤(중1 부담임)">정민지쌤(중1 부담임)</option>
+                        <option value="허예성쌤(중3-1 부담임)">허예성쌤(중3-1 부담임)</option>
+                        <option value="박경민쌤(할룸/보조교사)">박경민쌤(할룸/보조교사)</option>
                     </select>
                 </div>
+
+                <div class="section-divider"></div>
+
+                <!-- 예배 참석 섹션 -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">본당예배</label>
-                    <select name="mainWorship" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
-                        <option value="참석">참석</option>
-                        <option value="미참석">미참석</option>
-                    </select>
+                    <label class="label-text">🙏 예배 참석</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">부서예배</p>
+                            <div class="attendance-toggle" id="deptWorship">
+                                <button type="button" class="toggle-btn active" data-value="참석">✓ 참석</button>
+                                <button type="button" class="toggle-btn" data-value="미참석">✗ 미참석</button>
+                            </div>
+                            <input type="hidden" name="deptWorship" value="참석">
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">본당예배</p>
+                            <div class="attendance-toggle" id="mainWorship">
+                                <button type="button" class="toggle-btn active" data-value="참석">✓ 참석</button>
+                                <button type="button" class="toggle-btn" data-value="미참석">✗ 미참석</button>
+                            </div>
+                            <input type="hidden" name="mainWorship" value="참석">
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">미출석 사유 (해당 시)</label>
-                <input type="text" name="reason" placeholder="사유를 적어주세요" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
+                <!-- 미출석 사유 -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">공과진행</label>
-                    <select name="progress" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
-                        <option value="진행">진행</option>
-                        <option value="미진행">미진행</option>
-                    </select>
+                    <label class="label-text">📝 미출석 사유 (해당 시)</label>
+                    <input type="text" name="reason" placeholder="사유를 입력해 주세요" class="w-full border-2 border-gray-200 rounded-xl p-3.5 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-gray-50">
                 </div>
+
+                <div class="section-divider"></div>
+
+                <!-- 수업 진행 섹션 -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">반 학생 출석</label>
-                    <input type="number" name="studentCount" placeholder="0명" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="label-text">📚 수업 진행</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">공과 진행</p>
+                            <div class="attendance-toggle" id="progress">
+                                <button type="button" class="toggle-btn active" data-value="진행">✓ 진행</button>
+                                <button type="button" class="toggle-btn" data-value="미진행">✗ 미진행</button>
+                            </div>
+                            <input type="hidden" name="progress" value="진행">
+                        </div>
+                        <div>
+                            <label class="label-text text-sm">👥 반 학생 출석</label>
+                            <div class="flex items-center">
+                                <input type="number" name="studentCount" placeholder="0" class="w-full border-2 border-gray-200 rounded-xl p-3.5 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-gray-50">
+                                <span class="ml-3 text-gray-500 font-medium">명</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">심방 및 특이사항</label>
-                <textarea name="notes" rows="3" placeholder="기도제목이나 심방 내용을 기록해 주세요" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-            </div>
+                <div class="section-divider"></div>
 
-            <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transform active:scale-95 transition-all duration-150">
-                출석 보고하기
-            </button>
-        </form>
+                <!-- 특이사항 섹션 -->
+                <div>
+                    <label class="label-text">💬 심방 및 특이사항</label>
+                    <textarea name="notes" rows="4" placeholder="기도제목이나 심방 내용을 기록해 주세요" class="w-full border-2 border-gray-200 rounded-xl p-3.5 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-gray-50 resize-none"></textarea>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <button type="submit" id="submitBtn" class="submit-btn w-full text-white font-bold py-4 rounded-xl shadow-lg transition-all duration-150 text-lg">
+                    출석 보고하기
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-6 text-indigo-100 text-sm">
+            <p>언제나 응원하고 있습니다</p>
+        </div>
     </div>
 
     <script>
@@ -94,34 +219,52 @@
         const form = document.getElementById('attendanceForm');
         const btn = document.getElementById('submitBtn');
 
+        // 토글 버튼 기능
+        document.querySelectorAll('.attendance-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                if (e.target.classList.contains('toggle-btn')) {
+                    const buttons = toggle.querySelectorAll('.toggle-btn');
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    const hiddenInput = toggle.nextElementSibling;
+                    hiddenInput.value = e.target.dataset.value;
+                }
+            });
+        });
+
         form.addEventListener('submit', e => {
             e.preventDefault();
             btn.disabled = true;
-            btn.innerText = '전송 중...';
-            btn.classList.replace('bg-indigo-600', 'bg-gray-400');
+            btn.innerHTML = '<span class="loading-spinner"></span> 전송 중...';
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
             fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors', // CORS 정책 우회 (구글 웹앱용)
+                mode: 'no-cors',
                 cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
             .then(() => {
-                alert('정상적으로 제출되었습니다. 감사합니다!');
+                alert('✅ 정상적으로 제출되었습니다!\n감사합니다!');
                 form.reset();
+                document.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.toggle-btn:first-child').forEach(btn => {
+                    btn.classList.add('active');
+                });
             })
             .catch(error => {
-                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+                alert('⚠️ 오류가 발생했습니다.\n다시 시도해 주세요.');
                 console.error('Error!', error.message);
             })
             .finally(() => {
                 btn.disabled = false;
-                btn.innerText = '출석 보고하기';
-                btn.classList.replace('bg-gray-400', 'bg-indigo-600');
+                btn.innerHTML = '출석 보고하기';
             });
         });
     </script>
