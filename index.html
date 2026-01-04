@@ -243,7 +243,10 @@
 
             fetch(scriptURL, {
                 method: 'POST',
-                body: formData 
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
             })
             .then(() => {
                 alert('✅ 정상적으로 제출되었습니다!\n감사합니다!');
