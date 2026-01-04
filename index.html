@@ -110,7 +110,7 @@
             margin-bottom: 0;
         }
 
-        /* 출석 상태별 선택 효과 */
+        /* 선택 시 색상 효과 */
         #attend-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
         #attend-triangle:checked + label { border-color: #ffc107; background: #fffde7; color: #856404; }
         #attend-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
@@ -118,7 +118,6 @@
         #lesson-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
         #lesson-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
 
-        /* 미출석 사유 영역 초기 숨김 */
         #reason-group {
             display: none;
             background: #fff9f9;
@@ -139,13 +138,11 @@
             width: 100%;
             margin-top: 10px;
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
-            transition: transform 0.2s;
         }
 
         .submit-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
-            box-shadow: none;
         }
 
         .status-message {
@@ -218,7 +215,7 @@
 
                 <div class="form-group" id="reason-group">
                     <label for="absenceReason">미출석/지각 사유 (필수)</label>
-                    <textarea id="absenceReason" name="absenceReason" placeholder="사유를 입력해주세요"></textarea>
+                    <textarea id="absenceReason" name="absenceReason" placeholder="사유를 적어주세요"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -237,7 +234,7 @@
 
                 <div class="form-group">
                     <label for="classAttendance">반 학생 출석 현황</label>
-                    <textarea id="classAttendance" name="classAttendance" placeholder="예: 7명 출석 / 1명 결석"></textarea>
+                    <textarea id="classAttendance" name="classAttendance" placeholder="예: 5명 출석 / 2명 결석"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -251,8 +248,8 @@
     </div>
 
     <script>
-        // 새로 발급받으신 주소를 적용했습니다.
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYifDYMLUi76v4im7slcf2XoqHmdMxeEXNT_dv5R-C0NMGN7PjcQFh895bCBx4nBW5/exec';
+        // 요청하신 최신 웹앱 URL입니다.
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwj5giQvGNniATqi2yfzJ__mKKqjBS-PDAW0Lp1oN0r6BnxTQE6J67SShN3Nh-ZeXOI/exec';
 
         document.addEventListener('DOMContentLoaded', () => {
             const dateEl = document.getElementById('currentDate');
@@ -286,6 +283,9 @@
                 
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
+
+                // 참고: 앱스 스크립트 코드 내부에서 Utilities.formatDate를 사용하여 날짜를 생성하므로
+                // 여기서는 추가적인 날짜 데이터 전송이 필수는 아니지만, 안전을 위해 보냅니다.
                 data.timestamp = new Date().toLocaleString('ko-KR');
 
                 fetch(SCRIPT_URL, {
