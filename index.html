@@ -111,12 +111,15 @@
         }
 
         /* 선택 시 색상 효과 */
-        #attend-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
-        #attend-triangle:checked + label { border-color: #ffc107; background: #fffde7; color: #856404; }
-        #attend-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
-        
-        #lesson-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
-        #lesson-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
+        #attend-o:checked + label, #worship-o:checked + label, #lesson-o:checked + label { 
+            border-color: #28a745; background: #e8f5e9; color: #28a745; 
+        }
+        #attend-triangle:checked + label { 
+            border-color: #ffc107; background: #fffde7; color: #856404; 
+        }
+        #attend-x:checked + label, #worship-x:checked + label, #lesson-x:checked + label { 
+            border-color: #dc3545; background: #ffebee; color: #dc3545; 
+        }
 
         #reason-group {
             display: none;
@@ -196,7 +199,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>출석 여부</label>
+                    <label>청소년부 예배 출석</label>
                     <div class="radio-group">
                         <div class="radio-item">
                             <input type="radio" id="attend-o" name="attendance" value="O" required>
@@ -209,6 +212,20 @@
                         <div class="radio-item">
                             <input type="radio" id="attend-x" name="attendance" value="X">
                             <label for="attend-x">결석 (X)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>본당 예배 출석</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="worship-o" name="mainWorship" value="O" required>
+                            <label for="worship-o">출석 (O)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="worship-x" name="mainWorship" value="X">
+                            <label for="worship-x">불출석 (X)</label>
                         </div>
                     </div>
                 </div>
@@ -248,7 +265,6 @@
     </div>
 
     <script>
-        // 요청하신 최신 웹앱 URL입니다.
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwj5giQvGNniATqi2yfzJ__mKKqjBS-PDAW0Lp1oN0r6BnxTQE6J67SShN3Nh-ZeXOI/exec';
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -283,9 +299,6 @@
                 
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
-
-                // 참고: 앱스 스크립트 코드 내부에서 Utilities.formatDate를 사용하여 날짜를 생성하므로
-                // 여기서는 추가적인 날짜 데이터 전송이 필수는 아니지만, 안전을 위해 보냅니다.
                 data.timestamp = new Date().toLocaleString('ko-KR');
 
                 fetch(SCRIPT_URL, {
