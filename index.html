@@ -3,197 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 인천성산교회 청소년부 출석부</title>
+    <title>2026 청소년부 교사 출석부</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-        .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        .form-container { padding: 25px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
-        select, textarea, input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-        .radio-group { display: flex; gap: 10px; }
-        .radio-item { flex: 1; }
-        .radio-item input { display: none; }
-        .radio-item label {
-            display: block;
-            padding: 12px;
-            text-align: center;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        /* 선택 시 색상 */
-        input:checked + label { background: #4facfe; color: white; border-color: #4facfe; }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 16px;
-            border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
-        }
-        #reason-group { display: none; background: #fff9f9; padding: 15px; border-radius: 10px; border: 1px dashed #dc3545; }
+        body { font-family: 'Noto Sans KR', sans-serif; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h2>✝️ 2026 교사 출석부</h2>
-            <p>인천성산교회 청소년부</p>
+<body class="bg-slate-100 py-8 px-4">
+    <div class="max-w-md mx-auto bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
+        <div class="bg-indigo-700 p-8 text-white text-center">
+            <h1 class="text-2xl font-bold tracking-tight">청소년부 교사 출석부</h1>
+            <p class="text-indigo-100 text-sm mt-2 opacity-90">선생님, 오늘 사역 수고 많으셨습니다!</p>
         </div>
+        
+        <form id="attendanceForm" class="p-8 space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">교사 성함</label>
+                <select name="teacherName" required class="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-gray-50">
+                    <option value="">이름을 선택해 주세요</option>
+                    <option value="도민수쌤(부장)">도민수쌤(부장)</option>
+                    <option value="김영광쌤(총무)">김영광쌤(총무)</option>
+                    <option value="허현범쌤(회계)">허현범쌤(회계)</option>
+                    <option value="최은혜쌤(서기/중1 담임)">최은혜쌤(서기/중1 담임)</option>
+                    <option value="박기태쌤(교육부장/보조교사)">박기태쌤(교육부장/보조교사)</option>
+                    <option value="권오경쌤(고3-1 담임)">권오경쌤(고3-1 담임)</option>
+                    <option value="윤동길쌤(고3-2 담임)">윤동길쌤(고3-2 담임)</option>
+                    <option value="김혁배쌤(고2 담임)">김혁배쌤(고2 담임)</option>
+                    <option value="백경호쌤(고1-1 담임)">백경호쌤(고1-1 담임)</option>
+                    <option value="박대경쌤(고1-2 담임)">박대경쌤(고1-2 담임)</option>
+                    <option value="김수연쌤(중3-1 담임)">김수연쌤(중3-1 담임)</option>
+                    <option value="봉진영쌤(중3-2 담임)">봉진영쌤(중3-2 담임)</option>
+                    <option value="유기주쌤(중2-1 담임)">유기주쌤(중2-1 담임)</option>
+                    <option value="장근태쌤(중2-2 담임)">장근태쌤(중2-2 담임)</option>
+                    <option value="정민지쌤(중1 부담임)">정민지쌤(중1 부담임)</option>
+                    <option value="허예성쌤(중3-1 부담임)">허예성쌤(중3-1 부담임)</option>
+                    <option value="박경민쌤(할룸/보조교사)">박경민쌤(할룸/보조교사)</option>
+                </select>
+            </div>
 
-        <div class="form-container">
-            <form id="attendanceForm">
-                <div class="form-group">
-                    <label>교사명</label>
-                    <select name="teacher" required>
-                        <option value="">선택해주세요</option>
-                        <option value="도민수 쌤">도민수 쌤</option>
-                        <option value="김영광 쌤">김영광 쌤</option>
-                        <option value="허현범 쌤">허현범 쌤</option>
-                        <option value="최은혜 쌤">최은혜 쌤</option>
-                        <option value="권오경 쌤">권오경 쌤</option>
-                        <option value="윤동길 쌤">윤동길 쌤</option>
-                        <option value="김혁배 쌤">김혁배 쌤</option>
-                        <option value="박대경 쌤">박대경 쌤</option>
-                        <option value="백경호 쌤">백경호 쌤</option>
-                        <option value="유기주 쌤">유기주 쌤</option>
-                        <option value="장근태 쌤">장근태 쌤</option>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">부서예배</label>
+                    <select name="deptWorship" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
+                        <option value="참석">참석</option>
+                        <option value="미참석">미참석</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label>부서예배 출석</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="a1" name="attendance" value="O" required onclick="toggleReason(false)">
-                            <label for="a1">출석(O)</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="a2" name="attendance" value="△" onclick="toggleReason(true)">
-                            <label for="a2">지각(△)</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="a3" name="attendance" value="X" onclick="toggleReason(true)">
-                            <label for="a3">결석(X)</label>
-                        </div>
-                    </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">본당예배</label>
+                    <select name="mainWorship" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
+                        <option value="참석">참석</option>
+                        <option value="미참석">미참석</option>
+                    </select>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label>본당예배 출석</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="w1" name="mainWorship" value="O" required>
-                            <label for="w1">출석(O)</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="w2" name="mainWorship" value="X">
-                            <label for="w2">결석(X)</label>
-                        </div>
-                    </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">미출석 사유 (해당 시)</label>
+                <input type="text" name="reason" placeholder="사유를 적어주세요" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">공과진행</label>
+                    <select name="progress" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50">
+                        <option value="진행">진행</option>
+                        <option value="미진행">미진행</option>
+                    </select>
                 </div>
-
-                <div class="form-group">
-                    <label>공과 진행 여부</label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="l1" name="lesson" value="O" required>
-                            <label for="l1">진행(O)</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="l2" name="lesson" value="X">
-                            <label for="l2">미진행(X)</label>
-                        </div>
-                    </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">반 학생 출석</label>
+                    <input type="number" name="studentCount" placeholder="0명" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
+            </div>
 
-                <div class="form-group" id="reason-group">
-                    <label>미출석/지각 사유 (필수)</label>
-                    <input type="text" name="absenceReason" id="reasonInput" placeholder="사유를 적어주세요">
-                </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">심방 및 특이사항</label>
+                <textarea name="notes" rows="3" placeholder="기도제목이나 심방 내용을 기록해 주세요" class="w-full border border-gray-300 rounded-xl p-3 bg-gray-50 outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            </div>
 
-                <div class="form-group">
-                    <label>반 학생 출석 인원</label>
-                    <input type="text" name="classAttendance" placeholder="예: 5명 출석">
-                </div>
-
-                <div class="form-group">
-                    <label>심방 내용</label>
-                    <textarea name="visit" rows="2" placeholder="심방한 내용을 적어주세요"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>특이사항/기도제목</label>
-                    <textarea name="notes" rows="2" placeholder="기타 전달사항"></textarea>
-                </div>
-
-                <button type="submit" id="submitBtn" class="submit-btn">출석부 제출하기</button>
-            </form>
-        </div>
+            <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transform active:scale-95 transition-all duration-150">
+                출석 보고하기
+            </button>
+        </form>
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxFGWZXJHKHxQ7cToy-RvF0F-oWLFJ9cXC0uTCN7c5wAowoQwe-_66tR3sXaTDa1I-m/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyeJ6Gc-jZq-Ly7GHup3If74wCjoFF8szmN3uIKmx8i2ql9xjQ55iB4r7-tNji1CABI/exec';
+        const form = document.getElementById('attendanceForm');
+        const btn = document.getElementById('submitBtn');
 
-        function toggleReason(show) {
-            const group = document.getElementById('reason-group');
-            const input = document.getElementById('reasonInput');
-            group.style.display = show ? 'block' : 'none';
-            input.required = show;
-        }
-
-        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+        form.addEventListener('submit', e => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.innerText = '전송 중...';
+            btn.classList.replace('bg-indigo-600', 'bg-gray-400');
 
-            const formData = new FormData(this);
+            const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            fetch(SCRIPT_URL, {
+            fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'no-cors', // CORS 정책 우회 (구글 웹앱용)
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            }).then(() => {
-                alert('성공적으로 제출되었습니다!');
-                location.reload();
-            }).catch(err => {
-                alert('오류가 발생했습니다. 다시 시도해주세요.');
+            })
+            .then(() => {
+                alert('정상적으로 제출되었습니다. 감사합니다!');
+                form.reset();
+            })
+            .catch(error => {
+                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+                console.error('Error!', error.message);
+            })
+            .finally(() => {
                 btn.disabled = false;
-                btn.innerText = '출석부 제출하기';
+                btn.innerText = '출석 보고하기';
+                btn.classList.replace('bg-gray-400', 'bg-indigo-600');
             });
         });
     </script>
