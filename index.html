@@ -265,43 +265,6 @@
             });
         });
 
-        function doPost(e) {
-          try {
-            console.log(e, e.parameter);
-            const SHEET_ID = '13d5SyjYBnQiikX5Gg15UAul4GYdkknVYV1-G_8iuxNI'; // 제공해주신 시트 ID
-            const SHEET_NAME = '시트1'; // 시트 하단 탭 이름 확인 필수
-        
-            const ss = SpreadsheetApp.openById(SHEET_ID);
-            let sheet = ss.getSheetByName(SHEET_NAME) || ss.getSheets()[0];
-        
-            const data = JSON.parse(e.postData.contents);
-            const now = new Date();
-            const dateStr = Utilities.formatDate(now, "GMT+9", 'yyyy-MM-dd HH:mm:ss');
-        
-            // 시트 양식(A~I열) 순서에 정확히 맞춘 데이터 배열
-            const rowData = [
-              dateStr,                    // A: 제출일시
-              data.teacher || '',         // B: 교사명
-              data.attendance || '',      // C: 부서예배
-              data.mainWorship || '',     // D: 본당예배
-              data.lesson || '',          // E: 공과진행
-              data.absenceReason || '',   // F: 미출석사유
-              data.visit || '',           // G: 심방
-              data.classAttendance || '', // H: 반출석인원
-              data.notes || ''            // I: 특이사항
-            ];
-        
-            sheet.appendRow(rowData);
-        
-            return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
-              .setMimeType(ContentService.MimeType.JSON);
-        
-          } catch (error) {
-            console.log(error);
-            return ContentService.createTextOutput(JSON.stringify({ result: 'error', error: error.toString() }))
-              .setMimeType(ContentService.MimeType.JSON);
-          }
-        }
     </script>
 </body>
 </html>
