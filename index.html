@@ -83,7 +83,6 @@
             box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
         }
 
-        /* 라디오 버튼 스타일 개선 */
         .radio-group {
             display: flex;
             gap: 12px;
@@ -111,16 +110,15 @@
             margin-bottom: 0;
         }
 
-        /* 출석 상태별 색상 */
+        /* 출석 상태별 선택 효과 */
         #attend-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
         #attend-triangle:checked + label { border-color: #ffc107; background: #fffde7; color: #856404; }
         #attend-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
         
-        /* 공과 여부 색상 */
         #lesson-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
         #lesson-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
 
-        /* 미출석 사유 그룹 초기 숨김 */
+        /* 미출석 사유 영역 초기 숨김 */
         #reason-group {
             display: none;
             background: #fff9f9;
@@ -141,14 +139,16 @@
             width: 100%;
             margin-top: 10px;
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+            transition: transform 0.2s;
         }
 
         .submit-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
+            box-shadow: none;
         }
 
-        .success-message {
+        .status-message {
             display: none;
             padding: 15px;
             border-radius: 10px;
@@ -159,7 +159,6 @@
 
         @media (max-width: 600px) {
             .radio-group { flex-direction: column; }
-            .header h1 { font-size: 1.5em; }
         }
     </style>
 </head>
@@ -167,12 +166,12 @@
     <div class="container">
         <div class="header">
             <h1>✝️ 인천성산교회 청소년부</h1>
-            <p>하나님의 사랑으로 섬기는 교사 출석부</p>
+            <p>교사 출석 관리 시스템</p>
         </div>
 
         <div class="form-container">
             <div id="currentDate" class="date-info"></div>
-            <div id="statusMsg" class="success-message"></div>
+            <div id="statusMsg" class="status-message"></div>
 
             <form id="attendanceForm">
                 <div class="form-group">
@@ -218,8 +217,8 @@
                 </div>
 
                 <div class="form-group" id="reason-group">
-                    <label for="absenceReason">미출석/지각 사유</label>
-                    <textarea id="absenceReason" name="absenceReason" placeholder="간단한 사유를 입력해주세요 (예: 직장, 가족행사 등)"></textarea>
+                    <label for="absenceReason">미출석/지각 사유 (필수)</label>
+                    <textarea id="absenceReason" name="absenceReason" placeholder="사유를 입력해주세요"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -238,12 +237,12 @@
 
                 <div class="form-group">
                     <label for="classAttendance">반 학생 출석 현황</label>
-                    <textarea id="classAttendance" name="classAttendance" placeholder="예: 5명 출석 / 2명 결석"></textarea>
+                    <textarea id="classAttendance" name="classAttendance" placeholder="예: 7명 출석 / 1명 결석"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="visit">심방 및 특이사항</label>
-                    <textarea id="visit" name="visit" rows="3" placeholder="기도제목이나 심방 내용이 있다면 적어주세요"></textarea>
+                    <label for="visit">심방 내용 및 특이사항</label>
+                    <textarea id="visit" name="visit" rows="3" placeholder="내용을 적어주세요"></textarea>
                 </div>
 
                 <button type="submit" id="submitBtn" class="submit-btn">출석부 제출하기</button>
@@ -252,15 +251,14 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec';
+        // 새로 발급받으신 주소를 적용했습니다.
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYifDYMLUi76v4im7slcf2XoqHmdMxeEXNT_dv5R-C0NMGN7PjcQFh895bCBx4nBW5/exec';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 날짜 표시
             const dateEl = document.getElementById('currentDate');
             const now = new Date();
             dateEl.innerHTML = `<strong>오늘 날짜: ${now.toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'long'})}</strong>`;
 
-            // 출석 상태에 따른 사유 입력창 토글
             const reasonGroup = document.getElementById('reason-group');
             const reasonInput = document.getElementById('absenceReason');
             
@@ -277,29 +275,26 @@
                 });
             });
 
-            // 폼 제출
             const form = document.getElementById('attendanceForm');
             const btn = document.getElementById('submitBtn');
             const msg = document.getElementById('statusMsg');
 
             form.addEventListener('submit', e => {
                 e.preventDefault();
-                
                 btn.disabled = true;
                 btn.textContent = '제출 중...';
                 
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
-                data.timestamp = new Date().toLocaleString(); // 제출 시간 추가
+                data.timestamp = new Date().toLocaleString('ko-KR');
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // CORS 이슈 방지
+                    mode: 'no-cors', 
                     body: JSON.stringify(data)
                 })
                 .then(() => {
-                    // no-cors 모드는 응답을 읽을 수 없으므로 성공으로 간주하고 처리
-                    msg.textContent = '성공적으로 제출되었습니다. 감사합니다! 🙏';
+                    msg.textContent = '성공적으로 제출되었습니다! 감사합니다. 🙏';
                     msg.style.display = 'block';
                     msg.style.backgroundColor = '#d4edda';
                     msg.style.color = '#155724';
@@ -308,7 +303,7 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch(error => {
-                    msg.textContent = '오류가 발생했습니다. 다시 시도해주세요.';
+                    msg.textContent = '오류가 발생했습니다. 다시 시도해 주세요.';
                     msg.style.display = 'block';
                     msg.style.backgroundColor = '#f8d7da';
                     msg.style.color = '#721c24';
