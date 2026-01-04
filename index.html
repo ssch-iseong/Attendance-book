@@ -243,6 +243,8 @@
 
             fetch(scriptURL, {
                 method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
                   headers: {
                     'Content-Type': 'application/json'
                   },
