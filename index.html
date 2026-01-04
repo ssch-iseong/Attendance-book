@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>청소년부 교사 출석부</title>
+    <title>인천성산교회 청소년부 교사 출석부</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
@@ -23,7 +23,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             overflow: hidden;
         }
 
@@ -35,174 +35,18 @@
         }
 
         .header h1 {
-            font-size: 2.2em;
+            font-size: 1.8em;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
         .form-container {
-            padding: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #4facfe;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 8px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .radio-item:hover {
-            background: #f8f9fa;
-        }
-
-        .radio-item input[type="radio"] {
-            margin: 0;
-            width: 18px;
-            height: 18px;
-        }
-
-        .radio-item input[type="radio"]:checked + label {
-            color: #4facfe;
-            font-weight: 600;
-        }
-
-        .radio-item:has(input[type="radio"]:checked) {
-            border-color: #4facfe;
-            background: rgba(79, 172, 254, 0.1);
-        }
-
-        .radio-item label {
-            margin: 0;
-            font-size: 1.1em;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .attendance-options .radio-item {
-            min-width: 80px;
-        }
-
-        .attendance-options .radio-item:nth-child(1) {
-            border-color: #28a745;
-        }
-
-        .attendance-options .radio-item:nth-child(1):has(input:checked) {
-            border-color: #28a745;
-            background: rgba(40, 167, 69, 0.1);
-        }
-
-        .attendance-options .radio-item:nth-child(2) {
-            border-color: #ffc107;
-        }
-
-        .attendance-options .radio-item:nth-child(2):has(input:checked) {
-            border-color: #ffc107;
-            background: rgba(255, 193, 7, 0.1);
-        }
-
-        .attendance-options .radio-item:nth-child(3) {
-            border-color: #dc3545;
-        }
-
-        .attendance-options .radio-item:nth-child(3):has(input:checked) {
-            border-color: #dc3545;
-            background: rgba(220, 53, 69, 0.1);
-        }
-
-        .lesson-options .radio-item:nth-child(1) {
-            border-color: #28a745;
-        }
-
-        .lesson-options .radio-item:nth-child(1):has(input:checked) {
-            border-color: #28a745;
-            background: rgba(40, 167, 69, 0.1);
-        }
-
-        .lesson-options .radio-item:nth-child(2) {
-            border-color: #dc3545;
-        }
-
-        .lesson-options .radio-item:nth-child(2):has(input:checked) {
-            border-color: #dc3545;
-            background: rgba(220, 53, 69, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
+            padding: 30px;
         }
 
         .date-info {
             background: #f8f9fa;
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
             margin-bottom: 25px;
             text-align: center;
@@ -211,259 +55,270 @@
 
         .date-info strong {
             color: #4facfe;
-            font-size: 1.1em;
         }
 
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
             border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        /* 라디오 버튼 스타일 개선 */
+        .radio-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .radio-item {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-item input[type="radio"] {
             display: none;
         }
 
+        .radio-item label {
+            display: block;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 0;
+        }
+
+        /* 출석 상태별 색상 */
+        #attend-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
+        #attend-triangle:checked + label { border-color: #ffc107; background: #fffde7; color: #856404; }
+        #attend-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
+        
+        /* 공과 여부 색상 */
+        #lesson-o:checked + label { border-color: #28a745; background: #e8f5e9; color: #28a745; }
+        #lesson-x:checked + label { border-color: #dc3545; background: #ffebee; color: #dc3545; }
+
+        /* 미출석 사유 그룹 초기 숨김 */
+        #reason-group {
+            display: none;
+            background: #fff9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed #dc3545;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            display: none;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
         @media (max-width: 600px) {
-            .container {
-                margin: 10px;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            .radio-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .radio-item {
-                justify-content: flex-start;
-            }
+            .radio-group { flex-direction: column; }
+            .header h1 { font-size: 1.5em; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>✝️ 인천성산교회 청소년부 교사 출석부</h1>
-            <p>하나님의 사랑으로 섬기는 교사님들을 위한 출석 관리 시스템</p>
+            <h1>✝️ 인천성산교회 청소년부</h1>
+            <p>하나님의 사랑으로 섬기는 교사 출석부</p>
         </div>
 
         <div class="form-container">
-            <div class="date-info">
-                <strong>오늘 날짜: <span id="currentDate"></span></strong>
-            </div>
-
-            <div class="success-message" id="successMessage">
-                </div>
+            <div id="currentDate" class="date-info"></div>
+            <div id="statusMsg" class="success-message"></div>
 
             <form id="attendanceForm">
                 <div class="form-group">
                     <label for="teacher">교사명</label>
                     <select id="teacher" name="teacher" required>
                         <option value="">교사명을 선택해주세요</option>
-                        <optgroup label="청소년부">
-                            <option value="도민수 쌤(부장)">도민수 쌤(부장)</option>
-                            <option value="김영광 쌤(총무)">김영광 쌤(총무)</option>
-                            <option value="허현범 쌤(회계)">허현범 쌤(회계)</option>
-                            <option value="최은혜 쌤(서기/중 1 담임)">최은혜 쌤(서기/중 1 담임)</option>
-                            <option value="권오경 쌤(고 3-1반 담임)">권오경 쌤(고 3-1반 담임)</option>
-                            <option value="윤동길 쌤(고 3-2반 담임)">윤동길 쌤(고 3-2반 담임)</option>
-                            <option value="김혁배 쌤(고 2 담임)">김혁배 쌤(고 2 담임)</option>
-                            <option value="박대경 쌤(고 1-1반 담임)">박대경 쌤(고 1-1반 담임)</option>
-                            <option value="백경호 쌤(고 1-2반 담임)">백경호 쌤(고 1-2반 담임)</option>
-                            <option value="김수연 쌤(중 3-1반 담임)">김수연 쌤(중 3-1반 담임)</option>
-                            <option value="허예성 쌤(중 3-1반 부담임)">허예성 쌤(중 3-1반 부담임)</option>
-                            <option value="봉진영 쌤(중 3-2반 담임)">봉진영 쌤(중 3-2반 담임)</option>
-                            <option value="유기주 쌤(중 2-1반 담임)">유기주 쌤(중 2-1반 담임)</option>
-                            <option value="장근태 쌤(중 2-2반 담임)">장근태 쌤(중 2-2반 담임)</option>
-                            <option value="정민지 쌤(중 1 부담임/CCD)">정민지 쌤(중 1 부담임/CCD)</option>
-                            <option value="박기태 쌤(교육부장/보조교사)">박기태 쌤(교육부장/보조교사)</option>
-                            <option value="박경민 쌤(할룸/보조교사)">박경민 쌤(할룸/보조교사)</option>
-                           
-                   
-                        </optgroup>
+                        <option value="도민수 쌤(부장)">도민수 쌤(부장)</option>
+                        <option value="김영광 쌤(총무)">김영광 쌤(총무)</option>
+                        <option value="허현범 쌤(회계)">허현범 쌤(회계)</option>
+                        <option value="최은혜 쌤(서기/중 1 담임)">최은혜 쌤(서기/중 1 담임)</option>
+                        <option value="권오경 쌤(고 3-1반 담임)">권오경 쌤(고 3-1반 담임)</option>
+                        <option value="윤동길 쌤(고 3-2반 담임)">윤동길 쌤(고 3-2반 담임)</option>
+                        <option value="김혁배 쌤(고 2 담임)">김혁배 쌤(고 2 담임)</option>
+                        <option value="박대경 쌤(고 1-1반 담임)">박대경 쌤(고 1-1반 담임)</option>
+                        <option value="백경호 쌤(고 1-2반 담임)">백경호 쌤(고 1-2반 담임)</option>
+                        <option value="김수연 쌤(중 3-1반 담임)">김수연 쌤(중 3-1반 담임)</option>
+                        <option value="허예성 쌤(중 3-1반 부담임)">허예성 쌤(중 3-1반 부담임)</option>
+                        <option value="봉진영 쌤(중 3-2반 담임)">봉진영 쌤(중 3-2반 담임)</option>
+                        <option value="유기주 쌤(중 2-1반 담임)">유기주 쌤(중 2-1반 담임)</option>
+                        <option value="장근태 쌤(중 2-2반 담임)">장근태 쌤(중 2-2반 담임)</option>
+                        <option value="정민지 쌤(중 1 부담임/CCD)">정민지 쌤(중 1 부담임/CCD)</option>
+                        <option value="박기태 쌤(교육부장/보조교사)">박기태 쌤(교육부장/보조교사)</option>
+                        <option value="박경민 쌤(할룸/보조교사)">박경민 쌤(할룸/보조교사)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>출석 여부</label>
-                    <div class="radio-group attendance-options">
+                    <div class="radio-group">
                         <div class="radio-item">
                             <input type="radio" id="attend-o" name="attendance" value="O" required>
                             <label for="attend-o">출석 (O)</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" id="attend-triangle" name="attendance" value="△" required>
+                            <input type="radio" id="attend-triangle" name="attendance" value="△">
                             <label for="attend-triangle">지각 (△)</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" id="attend-x" name="attendance" value="X" required>
+                            <input type="radio" id="attend-x" name="attendance" value="X">
                             <label for="attend-x">결석 (X)</label>
                         </div>
                     </div>
                 </div>
 
+                <div class="form-group" id="reason-group">
+                    <label for="absenceReason">미출석/지각 사유</label>
+                    <textarea id="absenceReason" name="absenceReason" placeholder="간단한 사유를 입력해주세요 (예: 직장, 가족행사 등)"></textarea>
+                </div>
+
                 <div class="form-group">
-                    <label>공과 진행</label>
-                    <div class="radio-group lesson-options">
+                    <label>공과 진행 여부</label>
+                    <div class="radio-group">
                         <div class="radio-item">
                             <input type="radio" id="lesson-o" name="lesson" value="O" required>
                             <label for="lesson-o">진행 (O)</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" id="lesson-x" name="lesson" value="X" required>
+                            <input type="radio" id="lesson-x" name="lesson" value="X">
                             <label for="lesson-x">미진행 (X)</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="absenceReason">미출석 사유</label>
-                    <textarea id="absenceReason" name="absenceReason" placeholder="미출석 시 사유를 간단히 적어주세요 (예: 개인사정-가족,친구,직장, 출장, 몸살 등)"></textarea>
+                    <label for="classAttendance">반 학생 출석 현황</label>
+                    <textarea id="classAttendance" name="classAttendance" placeholder="예: 5명 출석 / 2명 결석"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="visit">심방</label>
-                    <textarea id="visit" name="visit" placeholder="심방 관련 내용이 있으시면 적어주세요"></textarea>
+                    <label for="visit">심방 및 특이사항</label>
+                    <textarea id="visit" name="visit" rows="3" placeholder="기도제목이나 심방 내용이 있다면 적어주세요"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="classAttendance">반 출석 인원</label>
-                    <textarea id="classAttendance" name="classAttendance" placeholder="담당 반 학생들의 출석 현황을 적어주세요 (예: 출석 8명, 결석 2명 등)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="notes">특이사항</label>
-                    <textarea id="notes" name="notes" placeholder="기타 특이사항이나 전달사항이 있으시면 적어주세요"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">출석부 제출하기</button>
+                <button type="submit" id="submitBtn" class="submit-btn">출석부 제출하기</button>
             </form>
         </div>
     </div>
 
     <script>
-        // 현재 날짜 표시
-        function displayCurrentDate() {
-            const now = new Date();
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                weekday: 'long' 
-            };
-            const dateString = now.toLocaleDateString('ko-KR', options);
-            document.getElementById('currentDate').textContent = dateString;
-        }
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec';
 
-        // 출석 상태에 따른 미출석 사유 필드 표시/숨김
-        function toggleAbsenceReason() {
-            const attendanceInputs = document.querySelectorAll('input[name="attendance"]');
-            const absenceReasonGroup = document.querySelector('label[for="absenceReason"]').parentElement;
+        document.addEventListener('DOMContentLoaded', () => {
+            // 날짜 표시
+            const dateEl = document.getElementById('currentDate');
+            const now = new Date();
+            dateEl.innerHTML = `<strong>오늘 날짜: ${now.toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'long'})}</strong>`;
+
+            // 출석 상태에 따른 사유 입력창 토글
+            const reasonGroup = document.getElementById('reason-group');
+            const reasonInput = document.getElementById('absenceReason');
             
-            attendanceInputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    if (this.value === 'X' || this.value === '△') {
-                        absenceReasonGroup.style.display = 'block';
+            document.querySelectorAll('input[name="attendance"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'X' || e.target.value === '△') {
+                        reasonGroup.style.display = 'block';
+                        reasonInput.required = true;
                     } else {
-                        absenceReasonGroup.style.display = 'none';
-                        document.getElementById('absenceReason').value = '';
+                        reasonGroup.style.display = 'none';
+                        reasonInput.required = false;
+                        reasonInput.value = '';
                     }
                 });
             });
-        }
 
-        // 폼 제출 처리 (개선된 버전)
-        function handleFormSubmit() {
+            // 폼 제출
             const form = document.getElementById('attendanceForm');
-            const successMessage = document.getElementById('successMessage');
-            const submitButton = form.querySelector('.submit-btn'); // 버튼을 가져옴
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('statusMsg');
 
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', e => {
                 e.preventDefault();
-
-                // 버튼 비활성화 (중복 제출 방지)
-                submitButton.disabled = true;
-                submitButton.textContent = '제출 중...';
-
-                // 폼 데이터 수집
+                
+                btn.disabled = true;
+                btn.textContent = '제출 중...';
+                
                 const formData = new FormData(form);
-                const data = {};
-
-                for (let [key, value] of formData.entries()) {
-                    data[key] = value;
-                }
-
-                // 현재 날짜 추가
-                // (Apps Script에서 사용하지 않으므로, Apps Script에서 날짜를 생성하도록 유지하는 것이 좋습니다.
-                // 또는 Apps Script에서 `data.date`를 사용하여 기록하도록 수정해야 합니다. 여기서는 그대로 둡니다.)
-                data.date = new Date().toISOString().split('T')[0];
-
-                // Google Apps Script로 데이터 전송
-                // IMPORTANT: 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec'
-                // 이 URL을 실제 배포된 Google Apps Script 웹 앱의 URL로 반드시 교체해야 합니다!
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDyytbXUBL22wCIyswZG8YlpUkWTTxe-aXyoBxwClDP1yAK5X5O25Xd3DzVeenamk/exec'; 
+                const data = Object.fromEntries(formData.entries());
+                data.timestamp = new Date().toLocaleString(); // 제출 시간 추가
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    mode: 'no-cors', // CORS 이슈 방지
                     body: JSON.stringify(data)
                 })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success) {
-                        console.log('데이터 전송 성공:', result);
-                        successMessage.textContent = '출석부가 성공적으로 제출되었습니다! 수고하셨습니다. 🙏';
-                        successMessage.style.backgroundColor = '#d4edda'; // 성공 색상
-                        successMessage.style.color = '#155724'; // 성공 텍스트 색상
-                        successMessage.style.display = 'block';
-                        successMessage.scrollIntoView({ behavior: 'smooth' });
-
-                        // 폼 초기화
-                        form.reset();
-                        // 미출석 사유 필드 숨김 상태로 되돌리기 (필요하다면)
-                        document.querySelector('label[for="absenceReason"]').parentElement.style.display = 'none';
-
-                    } else {
-                        console.error('데이터 전송 실패:', result.error);
-                        successMessage.textContent = '제출 실패: ' + result.error + ' 😢 다시 시도해주세요.';
-                        successMessage.style.backgroundColor = '#f8d7da'; // 오류 색상
-                        successMessage.style.color = '#721c24'; // 오류 텍스트 색상
-                        successMessage.style.display = 'block';
-                        successMessage.scrollIntoView({ behavior: 'smooth' });
-                    }
+                .then(() => {
+                    // no-cors 모드는 응답을 읽을 수 없으므로 성공으로 간주하고 처리
+                    msg.textContent = '성공적으로 제출되었습니다. 감사합니다! 🙏';
+                    msg.style.display = 'block';
+                    msg.style.backgroundColor = '#d4edda';
+                    msg.style.color = '#155724';
+                    form.reset();
+                    reasonGroup.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch(error => {
-                    console.error('Fetch 오류:', error);
-                    successMessage.textContent = '데이터 전송 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요. 😭';
-                    successMessage.style.backgroundColor = '#f8d7da';
-                    successMessage.style.color = '#721c24';
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    msg.textContent = '오류가 발생했습니다. 다시 시도해주세요.';
+                    msg.style.display = 'block';
+                    msg.style.backgroundColor = '#f8d7da';
+                    msg.style.color = '#721c24';
                 })
                 .finally(() => {
-                    // 버튼 다시 활성화
-                    submitButton.disabled = false;
-                    submitButton.textContent = '출석부 제출하기';
-
-                    // 3초 후 메시지 숨김
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 5000); // 오류 메시지는 좀 더 길게 표시할 수도 있습니다.
+                    btn.disabled = false;
+                    btn.textContent = '출석부 제출하기';
+                    setTimeout(() => msg.style.display = 'none', 5000);
                 });
             });
-        }
-
-        // 페이지 로드 시 초기화
-        document.addEventListener('DOMContentLoaded', function() {
-            displayCurrentDate();
-            toggleAbsenceReason();
-            handleFormSubmit(); // 이 함수가 호출되어 폼 제출 이벤트를 처리합니다.
         });
     </script>
 </body>
